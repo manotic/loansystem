@@ -36,10 +36,8 @@ class Database
             while ($row = $result->fetch_assoc()) {
                 $data[] = $row;
             }
-        } else {
-            echo "No result found";
         }
 
-        return $data;
+        return @$data;
     }
 }

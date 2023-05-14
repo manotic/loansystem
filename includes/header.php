@@ -1,3 +1,12 @@
+<?php
+    session_start();
+    require_once('includes.php');
+
+    //call database method for database connection
+    $user = new User();
+    
+    ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,12 +25,5 @@
     <!-- JavaScript and JQuery -->
     <script src="./js/jquery.js"></script>
     <script src="./bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <?php
-    session_start();
-    require_once('includes.php');
-
-    //call database method for database connection
-    $user = new User();
     
-    ?>
+    <title><?php echo $systemName; ?></title>
