@@ -27,3 +27,4 @@
     <script src="./bootstrap/js/bootstrap.bundle.min.js"></script>
     
     <title><?php echo $systemName; ?></title>
+</head>

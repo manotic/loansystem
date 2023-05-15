@@ -17,7 +17,6 @@ if (isset($_POST['login'])) {
     }
 }
 
-
 ?>
 </head>
 
@@ -39,10 +38,12 @@ if (isset($_POST['login'])) {
                 <label for="Password">Password</label>
                 <input type="password" name="password" class="form-control" id="Password" placeholder="Password">
             </div>
-            <button class="w-100 btn btn-lg btn-primary" type="submit" name="login">Log in</button>
+            <button class="w-100 btn btn-lg btn-primary" type="submit" name="login">Sign in</button>
+            <div class="mt-3">
+                <p>New user? <a href="register.php">Sign Up</a></p>
+            </div>
             <p class="mt-5 mb-3 text-muted">&copy; <?php echo date('Y'); ?></p>
         </form>
     </main>
 </body>
-
 </html>
