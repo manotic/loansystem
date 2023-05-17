@@ -7,7 +7,7 @@ class Database
     private $user = 'root';
     private $database = 'mikopo';
     private $password = '';
-    private $dbConnect = false;
+    protected $dbConnect = false;
     protected $userTable = 'users';
 
     //Method to create connection with $conn as variable

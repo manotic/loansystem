@@ -9,7 +9,7 @@ if (isset($_POST['login'])) {
         $login = $user->login($email, $password); 
         if(!empty($login)) {
             $_SESSION['email'] = $login[0]['email'];
-            $_SESSION['name'] = $login[0]['name'];			
+            $_SESSION['name'] = $login[0]['firstname'];			
             header("Location:index.php");
         } else {
             $loginError = "Invalid email or password!";
