@@ -1,5 +1,7 @@
 <?php 
 require ('includes/header.php');
+
+session_start();
 $user->checkLogin();
 ?>
   <body>
@@ -11,7 +13,7 @@ $user->checkLogin();
   </button>
   <div class="navbar-nav">
     <div class="nav-item text-nowrap">
-      <a class="nav-link px-3" href="#">Sign out</a>
+      <a class="nav-link px-3" href="action.php?action=logout">Sign out</a>
     </div>
   </div>
 </header>
@@ -71,7 +73,7 @@ $user->checkLogin();
             <li><a href="#" class="link-dark rounded">New...</a></li>
             <li><a href="#" class="link-dark rounded">Profile</a></li>
             <li><a href="#" class="link-dark rounded">Settings</a></li>
-            <li><a href="#" class="link-dark rounded">Sign out</a></li>
+            <li><a href="action.php?action=logout" class="link-dark rounded">Sign out</a></li>
           </ul>
         </div>
       </li>
@@ -84,7 +86,7 @@ $user->checkLogin();
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Dashboard</h2>
+        <h1 class="h2">User <?php echo $_SESSION['name'] ?></h2>
 
       </div>
       

@@ -1,10 +1,9 @@
 <?php
-    session_start();
     require_once('includes.php');
 
     //call database method for database connection
     $user = new User();
-    
+
     ?>
 
 <!DOCTYPE html>
