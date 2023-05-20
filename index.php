@@ -31,35 +31,21 @@ $user->checkLogin();
         </button>
         <div class="collapse show" id="home-collapse">
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="#" class="link-dark rounded">Overview</a></li>
-            <li><a href="#" class="link-dark rounded">Updates</a></li>
-            <li><a href="#" class="link-dark rounded">Reports</a></li>
+            <li><a href="index.php" class="link-dark rounded">Dashboard</a></li>
+            <li><a href="index.php?url=register" class="link-dark rounded">Register group</a></li>
+            <li><a href="#" class="link-dark rounded">Add group members</a></li>
+            <li><a href="#" class="link-dark rounded">Submit application</a></li>
           </ul>
         </div>
       </li>
       <li class="mb-1">
         <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
-          Dashboard
+          Loan management
         </button>
         <div class="collapse" id="dashboard-collapse">
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="#" class="link-dark rounded">Overview</a></li>
-            <li><a href="#" class="link-dark rounded">Weekly</a></li>
-            <li><a href="#" class="link-dark rounded">Monthly</a></li>
-            <li><a href="#" class="link-dark rounded">Annually</a></li>
-          </ul>
-        </div>
-      </li>
-      <li class="mb-1">
-        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
-          Orders
-        </button>
-        <div class="collapse" id="orders-collapse">
-          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="#" class="link-dark rounded">New</a></li>
-            <li><a href="#" class="link-dark rounded">Processed</a></li>
-            <li><a href="#" class="link-dark rounded">Shipped</a></li>
-            <li><a href="#" class="link-dark rounded">Returned</a></li>
+            <li><a href="#" class="link-dark rounded">Loan application</a></li>
+            <li><a href="#" class="link-dark rounded">Requested loan</a></li>
           </ul>
         </div>
       </li>
@@ -70,7 +56,6 @@ $user->checkLogin();
         </button>
         <div class="collapse" id="account-collapse">
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="#" class="link-dark rounded">New...</a></li>
             <li><a href="#" class="link-dark rounded">Profile</a></li>
             <li><a href="#" class="link-dark rounded">Settings</a></li>
             <li><a href="action.php?action=logout" class="link-dark rounded">Sign out</a></li>
@@ -85,13 +70,22 @@ $user->checkLogin();
     </nav>
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">User <?php echo $_SESSION['name'] ?></h2>
+    <?php
 
-      </div>
-      
-      <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
-    </main>
+    if (isset($_GET['url'])) {
+
+      $url= $_GET['url'];
+      $includeAddress = $user->getAddress($url);
+      if ($includeAddress) {
+        include ('includes/'.$includeAddress);
+      }
+    }
+
+    ?>
+</main>
+
+
+
   </div>
 </div>
 

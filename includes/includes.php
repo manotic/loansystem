@@ -35,4 +35,18 @@ class User extends Database
 
         return $userResult;
     }
+    public function getAddress($getUrl) {
+
+        switch ($getUrl) {
+            case 'register':
+                $getUrl = 'register-group.php';
+                break;
+            
+            default:
+                $getUrl = null;
+                break;
+        }
+
+        return $getUrl;
+    }
 }
