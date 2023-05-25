@@ -42,7 +42,9 @@ class User extends Database
             case 'register':
                 $getUrl = 'register-group.php';
                 break;
-            
+            case 'group-members':
+                $getUrl = 'add-group-members.php';
+                break;
             default:
                 $getUrl = null;
                 break;

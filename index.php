@@ -33,7 +33,7 @@ $user->checkLogin();
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
             <li><a href="index.php" class="link-dark rounded">Dashboard</a></li>
             <li><a href="index.php?url=register" class="link-dark rounded">Register group</a></li>
-            <li><a href="#" class="link-dark rounded">Add group members</a></li>
+            <li><a href="index.php?url=group-members" class="link-dark rounded">Group members</a></li>
             <li><a href="#" class="link-dark rounded">Submit application</a></li>
           </ul>
         </div>
