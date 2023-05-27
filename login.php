@@ -13,7 +13,16 @@ if (isset($_POST['login'])) {
             $_SESSION['email'] = $login[0]['email'];
             $_SESSION['name'] = $login[0]['firstname'];
             $_SESSION['role'] = $login[0]['role'];
-            header("Location:index.php");
+            if ($_SESSION['role'] == 'member') {
+
+                header("Location:index.php?url=member");
+            } else if ($_SESSION['role'] == 'user') {
+
+                header("Location:index.php?url=user");
+            } else {
+                
+                header("Location:index.php?url=admin");
+            }
         } else {
             $loginError = "Invalid email or password!";
         }

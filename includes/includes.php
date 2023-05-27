@@ -62,6 +62,9 @@ class User extends Database
             case 'group-activities':
                 $getUrl = 'add-group-activities.php';
                 break;
+            case 'member':
+                $getUrl = 'member-dash.php';
+                break;
             default:
                 $getUrl = null;
                 break;
@@ -121,6 +124,12 @@ class User extends Database
 
         return $this->getData($groupQuery);
     }
+    public function getMemberGroup($email) {
+
+        $groupQuery = "SELECT * FROM groups WHERE groupadminid='".$email."'";
+
+        return $this->getData($groupQuery);
+    }
     public function saveMember() {
 
         $firstname = $_POST['firstname'];
@@ -146,8 +155,9 @@ class User extends Database
         } else {
 
             $sqlInsert = "INSERT INTO group_members VALUES 
-            (NULL, '".$firstname."', '".$lastname."', '".$gender."', '".$email."',
-            '".$phonenumber."', '".$address."', '".$activies."', '".$position."', '".$education."', '".$password."', '".$adminemail."', 'member' )";
+            (NULL, '".$firstname."', '".$lastname."', '".$gender."', '".$email."', '".$phonenumber."', '".$address."',
+            '".$activies."', '".$position."', '".$education."', '".$password."', '".$adminemail."',
+            'member', 'NOT SET' )";
 
             mysqli_query($this->dbConnect, $sqlInsert);
             
@@ -162,6 +172,12 @@ class User extends Database
 
         return $this->getData($groupQuery);
     }
+    public function getMember() {
+
+        $groupQuery = "SELECT * FROM group_members WHERE email='".$_SESSION['email']."'";
+
+        return $this->getData($groupQuery);
+    }
     public function delGroupMember($id, $email) {
 
         $delQuery = "DELETE FROM group_members WHERE id='".$id."'";
@@ -170,6 +186,14 @@ class User extends Database
         $message = 'Member with name '.$email.' deleted successful!'; //Return message
 
         return $message;
+    }
+    public function memberSign() {
+
+        $status = $_POST['status'];
+
+        $sqlInsert = "UPDATE group_members SET status='".$status."' WHERE email='".$_SESSION['email']."'";
+
+        mysqli_query($this->dbConnect, $sqlInsert);
     }
     public function saveActivity() {
 

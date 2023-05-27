@@ -7,7 +7,7 @@ $user->checkLogin();
   <body>
     
 <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="index.php"><?php echo $systemName; ?></a>
+  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#"><?php echo $systemName; ?></a>
   <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -31,10 +31,27 @@ $user->checkLogin();
         </button>
         <div class="collapse show" id="home-collapse">
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+<?php 
+if ($_SESSION['role'] == 'user' ) {
+  ?>
             <li><a href="index.php" class="link-dark rounded">Dashboard</a></li>
             <li><a href="index.php?url=register" class="link-dark rounded">Register group</a></li>
             <li><a href="index.php?url=group-members" class="link-dark rounded">Group members</a></li>
             <li><a href="index.php?url=group-activities" class="link-dark rounded">Group activities</a></li>
+<?php 
+} else if ($_SESSION['role'] == 'admin' ) {
+  ?>
+            <li><a href="index.php?url=admin" class="link-dark rounded">Dashboard</a></li>
+            <li><a href="index.php?url=register" class="link-dark rounded">Register group</a></li>
+            <li><a href="index.php?url=group-members" class="link-dark rounded">Group members</a></li>
+            <li><a href="index.php?url=group-activities" class="link-dark rounded">Group activities</a></li>
+<?php 
+} else {
+  ?> 
+            <li><a href="index.php?url=member" class="link-dark rounded">Dashboard</a></li>
+<?php
+}
+?>
           </ul>
         </div>
       </li>
@@ -44,7 +61,7 @@ $user->checkLogin();
         </button>
         <div class="collapse" id="dashboard-collapse">
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="#" class="link-dark rounded">Loan application</a></li>
+            <!-- <li><a href="#" class="link-dark rounded">Loan application</a></li> -->
             <li><a href="#" class="link-dark rounded">Requested loan</a></li>
           </ul>
         </div>
@@ -56,8 +73,16 @@ $user->checkLogin();
         </button>
         <div class="collapse" id="account-collapse">
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="#" class="link-dark rounded">Profile</a></li>
-            <li><a href="#" class="link-dark rounded">Settings</a></li>
+            <!-- <li><a href="#" class="link-dark rounded">Profile</a></li> -->
+<?php 
+if ($_SESSION['role'] == 'member' ) {
+
+  echo '<li><a href="index.php?url=member-settings" class="link-dark rounded">Settings</a></li>';
+} else {
+
+  echo '<li><a href="index.php?url=settings" class="link-dark rounded">Settings</a></li>';
+}
+?>
             <li><a href="action.php?action=logout" class="link-dark rounded">Sign out</a></li>
           </ul>
         </div>

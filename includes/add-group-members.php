@@ -27,8 +27,8 @@ if (isset($_GET['member_del']) && ($_GET['email'])) {
     <th scope="col">Email</th>
     <th scope="col">Phone number</th>
     <th scope="col">Position</th>
-    <th scope="col">Action</th>
     <th scope="col">Member status</th>
+    <th scope="col">Action</th>
     </tr>
     </thead>
     <tbody>
@@ -45,6 +45,7 @@ if ($member != NULL) {
         echo '<td>'.$member[$i]['email'].'</td>';
         echo '<td>'.$member[$i]['phonenumber'].'</td>';
         echo '<td>'.$member[$i]['position'].'</td>';
+        echo '<td>'.$member[$i]['status'].'</td>';
         echo '<td><a class="badge squire-pill bg-danger" href="index.php?url=group-members&member_del='.$member[$i]['id'].'&email='.$member[$i]['email'].'">Delete</a></td>';
         echo '</tr>';
 
@@ -111,7 +112,7 @@ if ($member != NULL) {
         <option selected="">Education level</option>
         <option value="SECONDARY">SECONDARY</option>
         <option value="CERTIFICATES">CERTIFICATES</option>
-        <option value="O'LEVEL">O'LEVEL</option>
+        <option value="O LEVEL">O'LEVEL</option>
         <option value="UNIVERSITY">UNIVERSITY</option>
         </select>
     </div>
