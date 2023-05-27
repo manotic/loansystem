@@ -1,5 +1,5 @@
 <?php    
-require_once('includes/includes.php');
+require_once('includes/header.php');
 
 if (isset($_GET['action']) && $_GET['action'] == 'logout') {
 

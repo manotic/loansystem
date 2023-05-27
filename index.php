@@ -34,7 +34,7 @@ $user->checkLogin();
             <li><a href="index.php" class="link-dark rounded">Dashboard</a></li>
             <li><a href="index.php?url=register" class="link-dark rounded">Register group</a></li>
             <li><a href="index.php?url=group-members" class="link-dark rounded">Group members</a></li>
-            <li><a href="#" class="link-dark rounded">Submit application</a></li>
+            <li><a href="index.php?url=group-activities" class="link-dark rounded">Group activities</a></li>
           </ul>
         </div>
       </li>
