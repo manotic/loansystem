@@ -42,9 +42,6 @@ if ($_SESSION['role'] == 'user' ) {
 } else if ($_SESSION['role'] == 'admin' ) {
   ?>
             <li><a href="index.php?url=admin" class="link-dark rounded">Dashboard</a></li>
-            <li><a href="index.php?url=register" class="link-dark rounded">Register group</a></li>
-            <li><a href="index.php?url=group-members" class="link-dark rounded">Group members</a></li>
-            <li><a href="index.php?url=group-activities" class="link-dark rounded">Group activities</a></li>
 <?php 
 } else {
   ?> 
@@ -55,17 +52,23 @@ if ($_SESSION['role'] == 'user' ) {
           </ul>
         </div>
       </li>
+  <?php 
+  if ($_SESSION['role'] == 'user' ) {
+?>
       <li class="mb-1">
         <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
           Loan management
         </button>
         <div class="collapse" id="dashboard-collapse">
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <!-- <li><a href="#" class="link-dark rounded">Loan application</a></li> -->
-            <li><a href="#" class="link-dark rounded">Requested loan</a></li>
+        <!-- <li><a href="#" class="link-dark rounded">Loan application</a></li> -->
+            <li><a href="index.php?url=request" class="link-dark rounded">Requested loan</a></li>
+   
           </ul>
         </div>
       </li>
+      <?php 
+  } ?>
       <li class="border-top my-3"></li>
       <li class="mb-1">
         <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
@@ -89,8 +92,6 @@ if ($_SESSION['role'] == 'member' ) {
       </li>
     </ul>
 
-
-    
       </div>
     </nav>
 
@@ -109,12 +110,8 @@ if ($_SESSION['role'] == 'member' ) {
     ?>
 </main>
 
-
-
   </div>
 </div>
-
-
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 
       <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="dashboard.js"></script>

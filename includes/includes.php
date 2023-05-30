@@ -50,28 +50,6 @@ class User extends Database
     }
 
     //Control web urls and page appearance on index page.
-    public function getAddress($getUrl) {
-
-        switch ($getUrl) {
-            case 'register':
-                $getUrl = 'register-group.php';
-                break;
-            case 'group-members':
-                $getUrl = 'add-group-members.php';
-                break;
-            case 'group-activities':
-                $getUrl = 'add-group-activities.php';
-                break;
-            case 'member':
-                $getUrl = 'member-dash.php';
-                break;
-            default:
-                $getUrl = null;
-                break;
-        }
-
-        return $getUrl;
-    }
     public function registerGroup() {
         
         $groupName = $_POST['groupname'];
@@ -121,6 +99,18 @@ class User extends Database
     public function getGroup() {
 
         $groupQuery = "SELECT * FROM groups WHERE groupadminid='".$_SESSION['email']."'";
+
+        return $this->getData($groupQuery);
+    }
+    public function getGroups() {
+        
+        $groupQuery = "SELECT * FROM groups";
+
+        return $this->getData($groupQuery);
+    }
+    public function getGroupsDetails($id) {
+        
+        $groupQuery = "SELECT * FROM groups WHERE id='".$id."'";
 
         return $this->getData($groupQuery);
     }
@@ -178,6 +168,12 @@ class User extends Database
 
         return $this->getData($groupQuery);
     }
+    public function getMembersDetails($adminid) {
+        
+        $memberQuery = "SELECT * FROM group_members WHERE adminid = '".$adminid."' AND status='ACCEPTED'";
+
+        return $this->getData($memberQuery);
+    }
     public function delGroupMember($id, $email) {
 
         $delQuery = "DELETE FROM group_members WHERE id='".$id."'";
@@ -216,9 +212,82 @@ class User extends Database
 
         return $this->getData($activityQuery);
     }
+    public function getActivityDetails($adminemail) {
+        
+        $activityQuery = "SELECT * FROM group_activities WHERE adminid='".$adminemail."'";
+
+        return $this->getData($activityQuery);
+    }
     public function delGroupActivity($id) {
 
         $delQuery = "DELETE FROM group_activities WHERE id='".$id."'";
         mysqli_query($this->dbConnect, $delQuery);
+    }
+    public function submitApplication() {
+
+        $check = $this->getApplication();
+        if ($check == NULL) {
+            
+            $sqlQuery = "SELECT * FROM groups WHERE groupadminid='".$_SESSION['email']."'";
+
+            $result = $this->getData($sqlQuery);
+
+            if ($result != NULL) {
+
+                $sqlInsert = "INSERT INTO applications VALUES (NULL, '".$result[0]['id']."', '".$_SESSION['email']."', 'IN REVIEW', NULL)";
+
+                mysqli_query($this->dbConnect, $sqlInsert);
+            }
+        }
+    }
+    public function getApplication() {
+    
+        $sqlQuery = "SELECT * FROM applications WHERE adminid='".$_SESSION['email']."'";
+        return $this->getData($sqlQuery);
+    }
+    public function getApplicationDetails($adminid) {
+    
+        $sqlQuery = "SELECT * FROM applications WHERE adminid='".$adminid."'";
+        return $this->getData($sqlQuery);
+    }
+    public function updateApplication($adminid) {
+
+        $description = $_POST['description'];
+        $status = $_POST['status'];
+
+        $sqlInsert = "UPDATE applications SET status='".$status."', description='".$description."' WHERE adminid='".$adminid."'";
+
+        mysqli_query($this->dbConnect, $sqlInsert);
+    }
+    public function getAddress($getUrl) {
+
+        switch ($getUrl) {
+            case 'register':
+                $getUrl = 'register-group.php';
+                break;
+            case 'group-members':
+                $getUrl = 'add-group-members.php';
+                break;
+            case 'group-activities':
+                $getUrl = 'add-group-activities.php';
+                break;
+            case 'request':
+                $getUrl = 'loan-request.php';
+                break;
+            case 'member':
+                $getUrl = 'member-dash.php';
+                break;
+            case 'admin':
+                $getUrl = 'admin-dash.php';
+                break;
+            case 'group-details':
+                $getUrl = 'group-details.php';
+                break;
+            default:
+                $getUrl = null;
+                break;
+        }
+
+        return $getUrl;
     }
 }

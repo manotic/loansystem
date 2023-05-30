@@ -111,8 +111,8 @@ if ($member != NULL) {
         <select name="education" class="form-select form-select-md mb-3" aria-label=".form-select-md example">
         <option selected="">Education level</option>
         <option value="SECONDARY">SECONDARY</option>
+        <option value="A-LEVEL">ADAVANCED LEVEL</option>
         <option value="CERTIFICATES">CERTIFICATES</option>
-        <option value="O LEVEL">O'LEVEL</option>
         <option value="UNIVERSITY">UNIVERSITY</option>
         </select>
     </div>
