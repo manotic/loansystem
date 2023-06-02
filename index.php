@@ -80,7 +80,7 @@ if ($_SESSION['role'] == 'user' ) {
 <?php 
 if ($_SESSION['role'] == 'member' ) {
 
-  echo '<li><a href="index.php?url=member-settings" class="link-dark rounded">Settings</a></li>';
+  echo '<li><a href="index.php?url=settings" class="link-dark rounded">Settings</a></li>';
 } else {
 
   echo '<li><a href="index.php?url=settings" class="link-dark rounded">Settings</a></li>';

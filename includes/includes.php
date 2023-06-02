@@ -39,14 +39,87 @@ class User extends Database
 
 		mysqli_query($this->dbConnect, $sqlInsert);
     }
+    public function updateUser($oldpass) {
+
+        $firstname = $_POST['firstname'];
+        $lastname = $_POST['lastname'];
+        $password1 = $_POST['password1'];
+        $password2 = $_POST['password2'];
+        $password = $_POST['password'];
+        $password = md5($password);
+        
+        if ($oldpass == $password) {
+
+            if(isset($password1) && isset($password2)) {
+
+                if ($password1 == $password2) {
+                    
+                    $password = md5($password1);
+
+                    if ($_SESSION['role'] = 'member') {
+
+                        $sqlInsert = "
+                            UPDATE group_members
+                            SET firstname='".$firstname."', lastname='".$lastname."', password='".$password."'
+                            WHERE email='".$_SESSION['email']."'";
+        
+                        mysqli_query($this->dbConnect, $sqlInsert);
+                        $message = 'Member data updated successfully!';
+                    } else {
+        
+                        $sqlInsert = "
+                            UPDATE users
+                            SET firstname='".$firstname."', lastname='".$lastname."', password='".$password."'
+                            WHERE email='".$_SESSION['email']."'";
+        
+                        mysqli_query($this->dbConnect, $sqlInsert);
+                        $message = 'Admin data updated successfully!';
+                    }
+                } else {
+
+                    $message = "New password do not match! Please try again";
+                }
+            } else {
+                if ($_SESSION['role'] = 'member') {
+
+                    $sqlInsert = "
+                        UPDATE group_members
+                        SET firstname='".$firstname."', lastname='".$lastname."', password='".$password."'
+                        WHERE email='".$_SESSION['email']."'";
+    
+                    mysqli_query($this->dbConnect, $sqlInsert);
+                    $message = 'Member data updated successfully!';
+                } else {
+    
+                    $sqlInsert = "
+                        UPDATE users
+                        SET firstname='".$firstname."', lastname='".$lastname."', password='".$password."'
+                        WHERE email='".$_SESSION['email']."'";
+    
+                    mysqli_query($this->dbConnect, $sqlInsert);
+                    $message = 'Admin data updated successfully!';
+                }
+            }
+            
+        } else {
+
+            $message = 'Incorrect old password. Please confirm password and try again!';
+        }
+
+        return $message;
+    }
+    public function getUser() {
+
+        $sqlQuey = "SELECT * FROM users WHERE email='".$_SESSION['email']."'";
+
+        return $this->getData($sqlQuey);
+    } 
     public function userAvailabilityCheck() {
 
         //Check if user already registered
         $query = "SELECT * FROM users WHERE email='".$_POST['email']."'";
 
-        $userResult = $this->getData($query);
-
-        return $userResult;
+        return $this->getData($query);
     }
 
     //Control web urls and page appearance on index page.
@@ -282,6 +355,9 @@ class User extends Database
                 break;
             case 'group-details':
                 $getUrl = 'group-details.php';
+                break;
+            case 'settings':
+                $getUrl = 'account-settings.php';
                 break;
             default:
                 $getUrl = null;
