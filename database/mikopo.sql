@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 30, 2023 at 07:43 AM
+-- Generation Time: Jun 02, 2023 at 12:16 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -35,13 +35,6 @@ CREATE TABLE `applications` (
   `description` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
---
--- Dumping data for table `applications`
---
-
-INSERT INTO `applications` (`id`, `groupid`, `adminid`, `status`, `description`) VALUES
-(1, 3, 'user@user.com', 'ACCEPTED', 'fhfhdrtrtrt');
-
 -- --------------------------------------------------------
 
 --
@@ -61,13 +54,6 @@ CREATE TABLE `groups` (
   `groupadminid` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
---
--- Dumping data for table `groups`
---
-
-INSERT INTO `groups` (`id`, `groupname`, `shortname`, `phonenumber`, `groupemail`, `location`, `postaddress`, `contactphone`, `contactname`, `groupadminid`) VALUES
-(7, 'KILEBO KILIMO GROUP', 'KKG', '0745484525', 'group@example.com', 'KIBASILA, UPANGA MASHARIKI, ILALA, DAR ES SALAAM', 'P.O.BOX 3565 DAR ES SALAAM', '0742215532', 'JOE DOE', 'user@user.com');
-
 -- --------------------------------------------------------
 
 --
@@ -79,13 +65,6 @@ CREATE TABLE `group_activities` (
   `group_activity` varchar(100) NOT NULL,
   `adminid` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
---
--- Dumping data for table `group_activities`
---
-
-INSERT INTO `group_activities` (`id`, `group_activity`, `adminid`) VALUES
-(10, 'USAFIRISHAJI', 'user@user.com');
 
 -- --------------------------------------------------------
 
@@ -110,16 +89,6 @@ CREATE TABLE `group_members` (
   `status` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
---
--- Dumping data for table `group_members`
---
-
-INSERT INTO `group_members` (`id`, `firstname`, `lastname`, `gender`, `email`, `phonenumber`, `address`, `activities`, `position`, `education`, `password`, `adminid`, `role`, `status`) VALUES
-(3, 'ABASI', 'MUSSA', 'MALE', 'member@example.com', '0745484525', 'MSALATO, KEKO, DAR ES SALAAM', 'BODABODA', 'MEMBER', 'CERTIFICATES', '5f4dcc3b5aa765d61d8327deb882cf99', 'user@user.com', 'member', 'ACCEPTED'),
-(4, 'GJjhbjhgdf', 'hfdhhf', 'MALE', 'thdf@jjgjg.fgg', '0745484525', 'MSALATO, KEKO, DAR ES SALAAM', 'MJASIRIAMALI', 'MEMBER', 'O LEVEL', '5f4dcc3b5aa765d61d8327deb882cf99', 'user@user.com', 'member', 'NOT SET'),
-(5, 'Joe', 'Doe', 'MALE', 'tyrhx@hy.fdf', '0745484525', 'MSALATO, KEKO, DAR ES SALAAM', 'BODABODA', 'SECRETARY', 'UNIVERSITY', '5f4dcc3b5aa765d61d8327deb882cf99', 'user@user.com', 'member', 'ACCEPTED'),
-(6, 'Ezy', 'Joe', 'FEMAILE', 'gfhg@ttgt.gfd', '0745484525', 'MSALATO, KEKO, DAR ES SALAAM', 'MJASIRIAMALI', 'CHAIRPERSON', 'SECONDARY', '5f4dcc3b5aa765d61d8327deb882cf99', 'user@user.com', 'member', 'REJECTED');
-
 -- --------------------------------------------------------
 
 --
@@ -140,8 +109,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `password`, `role`) VALUES
-(4, '', '', 'admin@admin.com', '5f4dcc3b5aa765d61d8327deb882cf99', 'admin'),
-(8, 'John', 'Doe', 'user@user.com', '5f4dcc3b5aa765d61d8327deb882cf99', 'user');
+(4, 'Admin', '', 'admin@admin.com', '5f4dcc3b5aa765d61d8327deb882cf99', 'admin'),
+(10, 'Joe', 'Doe', 'joe@doe.com', '0cc175b9c0f1b6a831c399e269772661', 'user');
 
 --
 -- Indexes for dumped tables
@@ -209,7 +178,7 @@ ALTER TABLE `group_members`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
