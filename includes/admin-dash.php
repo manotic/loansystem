@@ -29,12 +29,12 @@ if ($group != NULL) {
 
         echo '<tr>';
         echo '<th scope="row">'.$rownum.'</th>';
-        echo '<td>'.@$group[0]['groupname'].'</td>';
-        echo '<td>'.@$group[0]['shortname'].'</td>';
-        echo '<td>'.@$group[0]['phonenumber'].'</td>';
-        echo '<td>'.@$group[0]['groupemail'].'</td>';
-        echo '<td>'.@$group[0]['location'].'</td>';
-        echo '<td>'.@$group[0]['postaddress'].'</td>';
+        echo '<td>'.@$group[$i]['groupname'].'</td>';
+        echo '<td>'.@$group[$i]['shortname'].'</td>';
+        echo '<td>'.@$group[$i]['phonenumber'].'</td>';
+        echo '<td>'.@$group[$i]['groupemail'].'</td>';
+        echo '<td>'.@$group[$i]['location'].'</td>';
+        echo '<td>'.@$group[$i]['postaddress'].'</td>';
         // echo '<td class="table-info">'.@$application[0]['status'].'</td>';
         echo '<td><a class="badge squire-pill bg-info" href="index.php?url=group-details&group='.@$group[$i]['id'].'">View more</a></td>';
         echo '</tr>';
