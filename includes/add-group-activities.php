@@ -19,7 +19,7 @@ if (isset($_GET['activity_del'])) {
     <div class="alert alert-primary rounded-0 py-1"><?php echo @$msg; ?></div>
     <?php } ?>
 </div>
-<form method="POST" class=" row g-3 mt-3">
+<form method="POST" class=" row g-3 mt-3"  enctype="multipart/form-data">
     <input type="hidden" name="id" value="<?php echo @$group[0]['id']; ?>">
     <div class="mb-3">
         <label for="floatingInput">Activity</label>

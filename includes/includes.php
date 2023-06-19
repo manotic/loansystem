@@ -197,6 +197,7 @@ class User extends Database
 
         $firstname = $_POST['firstname'];
         $lastname = $_POST['lastname'];
+        $birthdate = date('Y-m-d', strtotime($_POST['birthdate']));
         $gender = $_POST['gender'];
         $email = $_POST['email'];
         $phonenumber = $_POST['phonenumber'];
@@ -218,7 +219,7 @@ class User extends Database
         } else {
 
             $sqlInsert = "INSERT INTO group_members VALUES 
-            (NULL, '".$firstname."', '".$lastname."', '".$gender."', '".$email."', '".$phonenumber."', '".$address."',
+            (NULL, '".$firstname."', '".$lastname."', '".$birthdate."', '".$gender."', '".$email."', '".$phonenumber."', '".$address."',
             '".$activies."', '".$position."', '".$education."', '".$password."', '".$adminemail."',
             'member', 'NOT SET' )";
 

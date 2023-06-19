@@ -79,7 +79,11 @@ if ($member != NULL) {
         <label for="floatingInput">Last name</label>
         <input type="text" name="lastname" class="form-control" value="<?php echo @$group[0]['phonenumber']; ?>" id="floatingInput" placeholder="" required>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-2">
+        <label for="floatingInput">Birth date</label>
+        <input type="date" name="birthdate" class="form-control" value="<?php echo @$group[0]['groupemail']; ?>" id="floatingInput"required>
+    </div>
+    <div class="col-md-2">
         <label for="floatingInput">Gender</label>
         <input type="text" name="gender" class="form-control" value="<?php echo @$group[0]['groupemail']; ?>" id="floatingInput" placeholder="MALE/FEMALE" required>
     </div>
