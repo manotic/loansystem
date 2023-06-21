@@ -25,6 +25,10 @@ if (isset($_GET['activity_del'])) {
         <label for="floatingInput">Activity</label>
         <input type="text" name="activity" class="form-control" value="<?php echo @$group[0]['groupname']; ?>" id="floatingInput" placeholder="" required>
     </div>
+    <div class="mb-3">
+        <label class="form-label" for="customFile">Add attachment</label>
+        <input type="file" name="upload" class="form-control" id="customFile">
+    </div>
     <button class="w-100 btn btn-lg btn-primary" type="submit" name="add-activity">Add activity</button>
 </form>
 </div>
@@ -36,6 +40,7 @@ if (isset($_GET['activity_del'])) {
     <tr>
     <th scope="col">#</th>
     <th scope="col">Activities</th>
+    <th scope="col">Attachment</th>
     <th scope="col">Action</th>
     </tr>
     </thead>
@@ -49,6 +54,7 @@ if ($activity != NULL) {
         echo '<tr>';
         echo '<th scope="row">'.$rownum.'</th>';
         echo '<td>'.$activity[$i]['group_activity'].'</td>';
+        echo '<td><a href="uploads/'.$activity[$i]['file_name'].'" target="_blank">View attachiment</a></td>';
         echo '<td><a class="badge squire-pill bg-danger" href="index.php?url=group-activities&activity_del='.$activity[$i]['id'].'">Delete</a></td>';
         echo '</tr>';
     

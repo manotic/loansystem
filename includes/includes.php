@@ -270,12 +270,26 @@ class User extends Database
         $groupActivity = $_POST['activity'];
         $adminemail = $_SESSION['email'];
 
+        if(isset($_FILES['upload'])){
+            $file_name = $_FILES['upload']['name'];
+            $file_ext = explode('.',$_FILES['upload']['name']);
+            $file_ext = end($file_ext);
+            $file_ext = strtolower($file_ext);
+            $file_name = pathinfo($_FILES['upload']['name'], PATHINFO_FILENAME).uniqid().".".$file_ext;
+            $file_tmp =$_FILES['upload']['tmp_name'];
+         
+            
+            move_uploaded_file($file_tmp,"uploads/".$file_name);
+           
+        }
+
         $sqlInsert = "INSERT INTO group_activities VALUES 
-        (NULL, '".$groupActivity."', '".$adminemail."')";
+        (NULL, '".$groupActivity."', '".$file_name."', '".$adminemail."')";
 
         mysqli_query($this->dbConnect, $sqlInsert);
         
         $message = 'Activity added successful!';
+
         
         return $message;
     }
