@@ -322,7 +322,7 @@ class User extends Database
 
             if ($result != NULL) {
 
-                $sqlInsert = "INSERT INTO applications VALUES (NULL, '".$result[0]['id']."', '".$_SESSION['email']."', 'IN REVIEW', NULL)";
+                $sqlInsert = "INSERT INTO applications VALUES (NULL, '".$result[0]['id']."', '".$_SESSION['email']."', '".$_POST['amount']."', 'IN REVIEW', NULL)";
 
                 mysqli_query($this->dbConnect, $sqlInsert);
             }

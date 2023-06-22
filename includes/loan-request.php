@@ -23,6 +23,10 @@ Apply loan for your group, confirm all your details and make sure they are all g
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
 <form method="POST" class=" row alert g-3 col-md-6">
+    <div class="">
+        <label for="floatingInput">Amount for request in TSh</label>
+        <input type="number" name="amount" class="form-control" id="floatingInput" required>
+    </div>
 <button class="w-100 btn btn-lg btn-primary" type="submit" name="apply">Save your choice</button>
 </form>
 <?php 
