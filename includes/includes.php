@@ -316,17 +316,22 @@ class User extends Database
         $check = $this->getApplication();
         if ($check == NULL) {
             
-            $sqlQuery = "SELECT * FROM groups WHERE groupadminid='".$_SESSION['email']."'";
+            $sqlQuery = "SELECT * FROM group_members WHERE adminid='".$_SESSION['email']."' AND status='ACCEPTED'";
 
             $result = $this->getData($sqlQuery);
 
-            if ($result != NULL) {
+            if (sizeof($result) >= 5) {
 
                 $sqlInsert = "INSERT INTO applications VALUES (NULL, '".$result[0]['id']."', '".$_SESSION['email']."', '".$_POST['amount']."', 'IN REVIEW', NULL)";
 
                 mysqli_query($this->dbConnect, $sqlInsert);
+            } else {
+
+                $message = "Accepted group members must be five or more!";
             }
         }
+
+        return @$message;
     }
     public function getApplication() {
     

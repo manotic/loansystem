@@ -23,6 +23,9 @@ Apply loan for your group, confirm all your details and make sure they are all g
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
 <form method="POST" class=" row alert g-3 col-md-6">
+    <?php if (isset($msg)) { ?>
+    <div class="alert alert-danger rounded-0 py-1"><?php echo @$msg; ?></div>
+    <?php } ?>
     <div class="">
         <label for="floatingInput">Amount for request in TSh</label>
         <input type="number" name="amount" class="form-control" id="floatingInput" required>
@@ -43,6 +46,7 @@ Apply loan for your group, confirm all your details and make sure they are all g
     <th scope="col">Email address</th>
     <th scope="col">Location</th>
     <th scope="col">Post address</th>
+    <th scope="col">Amount</th>
     <th scope="col">Status</th>
     </tr>
     </thead>
@@ -56,6 +60,7 @@ echo '<td>'.@$group[0]['phonenumber'].'</td>';
 echo '<td>'.@$group[0]['groupemail'].'</td>';
 echo '<td>'.@$group[0]['location'].'</td>';
 echo '<td>'.@$group[0]['postaddress'].'</td>';
+echo '<td>'.$application[0]['amount'].'</td>';
 echo '<td class="table-info">'.@$application[0]['status'].'</td>';
 // echo '<td><a class="badge squire-pill bg-danger" href="index.php?url=group-members&member_del='.$member[$i]['id'].'&email='.$member[$i]['email'].'">Delete</a></td>';
 echo '</tr>';

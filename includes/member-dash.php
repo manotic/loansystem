@@ -3,6 +3,7 @@
 $member = $user->getMember();
 $adminid = $member[0]['adminid'];
 $group = $user->getMemberGroup($adminid);
+$app = $user->getApplicationDetails($adminid);
 
 if (isset($_POST['choice'])) {
 
@@ -32,6 +33,8 @@ if (isset($_POST['choice'])) {
     <th scope="col">Email address</th>
     <th scope="col">Location</th>
     <th scope="col">Post address</th>
+    <th scope="col">Application status</th>
+    <th scope="col">Amount</th>
     <th scope="col">Participation</th>
     </tr>
     </thead>
@@ -45,6 +48,8 @@ echo '<td>'.@$group[0]['phonenumber'].'</td>';
 echo '<td>'.@$group[0]['groupemail'].'</td>';
 echo '<td>'.@$group[0]['location'].'</td>';
 echo '<td>'.@$group[0]['postaddress'].'</td>';
+if ($app == NULL) { echo '<td>NOT SENT</td> <td>NOT SENT</td>'; }
+else { echo '<td>'.$app[0]['status'].'</td> <td>'.$app[0]['amount'].'</td>'; }
 echo '<td class="table-info">'.@$member[0]['status'].'</td>';
 // echo '<td><a class="badge squire-pill bg-danger" href="index.php?url=group-members&member_del='.$member[$i]['id'].'&email='.$member[$i]['email'].'">Delete</a></td>';
 echo '</tr>';
