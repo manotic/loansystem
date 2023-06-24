@@ -316,18 +316,18 @@ class User extends Database
         $check = $this->getApplication();
         if ($check == NULL) {
             
-            $sqlQuery = "SELECT * FROM group_members WHERE adminid='".$_SESSION['email']."' AND status='ACCEPTED'";
+            $sqlQuery = "SELECT * FROM group_members WHERE adminid='".$_SESSION['email']."' AND NOT status='NOT SET'";
 
             $result = $this->getData($sqlQuery);
 
-            if (sizeof($result) >= 5) {
+            if (sizeof($result) >= 1) {
 
                 $sqlInsert = "INSERT INTO applications VALUES (NULL, '".$result[0]['id']."', '".$_SESSION['email']."', '".$_POST['amount']."', 'IN REVIEW', NULL)";
 
                 mysqli_query($this->dbConnect, $sqlInsert);
             } else {
 
-                $message = "Accepted group members must be five or more!";
+                $message = "Group should have one or more members who updated their status!";
             }
         }
 
@@ -351,6 +351,64 @@ class User extends Database
         $sqlInsert = "UPDATE applications SET status='".$status."', description='".$description."' WHERE adminid='".$adminid."'";
 
         mysqli_query($this->dbConnect, $sqlInsert);
+    }
+    public function applicationValidation($adminid) {
+
+        $validApp = false;
+        //Should have more that 5 approved
+        $errors = array();
+        
+        $sqlQuery = "SELECT * FROM group_members WHERE status='ACCEPTED' AND adminid='".$adminid."' ORDER BY birthdate DESC";
+        $members = $this->getData($sqlQuery);
+
+        if (sizeof($members) >= 5) {
+
+            // $date = array();
+            $ageRestriction = false;
+            for ($i=0; $i < sizeof($members); $i++) {
+                $minAge = 18;
+                $maxAge = 35;
+
+                // $dateOfBirth = date('Y-m-d', strtotime($members[$i]['birthdate']));
+                // $today = date("Y-m-d");
+                // $diff = date_diff(date_create($dateOfBirth), date_create($today));
+                $birthday = new DateTime($members[$i]['birthdate']);
+                $diff = $birthday->diff(new DateTime);
+                $diff = intval($diff->format('%y'));
+                print_r(gettype($diff));
+                if ($diff >= $minAge && $diff <= $maxAge) {
+                    $ageRestriction = false;
+                    echo "This place is checked";
+                    // $i = sizeof($members);
+                    // break;
+                } else {
+                    
+                    $ageRestriction = true;
+                    $i = sizeof($members);
+                }
+            }
+            
+            // print_r($date);
+            // foreach ($date as $value) {
+            //     if ($value < 18 && $value > 35) {
+            //         $ageRestriction = true;
+            //         print_r($date);
+            //         break;
+            //     }
+            // }
+            if ($ageRestriction == false ) {
+                
+                $validApp = true;
+            } else {
+
+                $errors[] = '<div class="alert alert-danger rounded-0 py-1">Group members age should be between 18 to 35 years</div>';
+            }
+        } else {
+
+            $errors[] = '<div class="alert alert-danger rounded-0 py-1">Group members who accepted participation should be 5 or more</div>';
+        }
+
+        return $validApp;
     }
     public function getAddress($getUrl) {
 

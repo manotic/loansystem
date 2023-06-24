@@ -3,7 +3,8 @@ $group = $user->getGroupsDetails($_GET['group']);
 $activity = $user->getActivityDetails($group[0]['groupadminid']);
 $member = $user->getMembersDetails($group[0]['groupadminid']);
 $application = $user->getApplicationDetails($group[0]['groupadminid']);
-
+$check = $user->applicationValidation($group[0]['groupadminid']);
+    
 if (isset($_POST['application'])) {
 
         $update = $user->updateApplication($group[0]['groupadminid']);
@@ -102,6 +103,7 @@ for ($i=0; $i < sizeof($member); $i++) {
     <tr>
     <th scope="col">#</th>
     <th scope="col">Activities</th>
+    <th scope="col">Attachment</th>
     <!-- <th scope="col">Action</th> -->
     </tr>
     </thead>
@@ -115,6 +117,7 @@ if ($activity != NULL) {
         echo '<tr>';
         echo '<th scope="row">'.$rownum.'</th>';
         echo '<td>'.$activity[$i]['group_activity'].'</td>';
+        echo '<td><a href="uploads/'.$activity[$i]['file_name'].'" target="_blank">View attachiment</a></td>';
         // echo '<td><a class="badge squire-pill bg-danger" href="index.php?url=group-activities&activity_del='.$activity[$i]['id'].'">Delete</a></td>';
         echo '</tr>';
     
@@ -143,10 +146,20 @@ Are you willing to participate in this application?
           <span class="input-group-text">Description</span>
           <textarea class="form-control" aria-label="With textarea" name="description"></textarea>
         </div>
+        
     <div class="col-md-6">
         <select name="status" class="form-select form-select-md mb-3" aria-label=".form-select-md example">
-            <option value="ACCEPTED">ACCEPT APPLICATION</option>
-            <option value="NOT APPROVED">REJECT APPLICATION</option>
+        <?php
+        if ($check == false) { 
+        ?>
+        <option value="NOT APPROVED">REJECT APPLICATION</option>
+        <?php
+    } else if ($check == true) {
+        ?>
+        <option value="ACCEPTED">ACCEPT APPLICATION</option>
+        <option value="NOT APPROVED">REJECT APPLICATION</option>
+        <?php
+    } ?>
         </select>
     </div>
     <button class="w-100 btn btn-lg btn-primary" type="submit" name="application">Save your choice</button>

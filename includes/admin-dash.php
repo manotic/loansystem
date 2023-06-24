@@ -27,7 +27,13 @@ $rownum = 1;
 if ($group != NULL) {
     for ($i=0; $i < sizeof($group); $i++) {
 
-        echo '<tr>';
+        $check = $user->applicationValidation($group[$i]['groupadminid']);
+        if ($check == false) {
+            $check = 'table-danger';
+        } else if ($check == true) {
+            $check = 'table-success';
+        }
+        echo '<tr class="'.@$check.'">';
         echo '<th scope="row">'.$rownum.'</th>';
         echo '<td>'.@$group[$i]['groupname'].'</td>';
         echo '<td>'.@$group[$i]['shortname'].'</td>';
