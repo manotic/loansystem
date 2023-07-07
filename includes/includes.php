@@ -375,10 +375,10 @@ class User extends Database
                 $birthday = new DateTime($members[$i]['birthdate']);
                 $diff = $birthday->diff(new DateTime);
                 $diff = intval($diff->format('%y'));
-                print_r(gettype($diff));
+                // print_r(gettype($diff));
                 if ($diff >= $minAge && $diff <= $maxAge) {
                     $ageRestriction = false;
-                    echo "This place is checked";
+                    // echo "This place is checked";
                     // $i = sizeof($members);
                     // break;
                 } else {

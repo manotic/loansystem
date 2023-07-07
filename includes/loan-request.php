@@ -38,7 +38,7 @@ Apply loan for your group, confirm all your details and make sure they are all g
 <div class="bd-example mt-5">
 <table class="table table-striped">
     <thead>
-    <tr>
+    <tr>    
     <!-- <th scope="col">#</th> -->
     <th scope="col">Group name</th>
     <th scope="col">Short name</th>
@@ -52,16 +52,22 @@ Apply loan for your group, confirm all your details and make sure they are all g
     </thead>
     <tbody>
 <?php 
+if (isset($_GET['click']) && $application[0]['status'] != "IN REVIEW") {
+    $message = '<div class="alert alert-info rounded-0 py-1">'.$application[0]['description'].'</div>';
+} else {
+    $message = '<div class="alert alert-info rounded-0 py-1">No more information</div>';
+
+}
 echo '<tr>';
 // echo '<th scope="row">'.$rownum.'</th>';
 echo '<td>'.@$group[0]['groupname'].'</td>';
 echo '<td>'.@$group[0]['shortname'].'</td>';
 echo '<td>'.@$group[0]['phonenumber'].'</td>';
-echo '<td>'.@$group[0]['groupemail'].'</td>';
+echo '<td>'.@$group[0]['groupemail'].'</td>';   
 echo '<td>'.@$group[0]['location'].'</td>';
-echo '<td>'.@$group[0]['postaddress'].'</td>';
+echo '<td>'.@$group[0]['postaddress'].'</td>';  
 echo '<td>'.$application[0]['amount'].'</td>';
-echo '<td class="table-info">'.@$application[0]['status'].'</td>';
+echo '<td class="table-info">'.@$application[0]['status'].' <a class="badge squire-pill bg-info" href="index.php?url=request&click=view-more">View more</a></td>';
 // echo '<td><a class="badge squire-pill bg-danger" href="index.php?url=group-members&member_del='.$member[$i]['id'].'&email='.$member[$i]['email'].'">Delete</a></td>';
 echo '</tr>';
 ?>
@@ -69,5 +75,7 @@ echo '</tr>';
 </table>
 </div>
 <?php 
+
+echo @$message;
 }
 ?>
