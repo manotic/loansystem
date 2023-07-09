@@ -7,6 +7,7 @@ if (isset($_POST['apply'])) {
 $application = $user->getApplication();
 $group = $user->getGroup();
 
+
 ?>
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 <h1 class="h2">Loan application</h2>
@@ -54,9 +55,10 @@ Apply loan for your group, confirm all your details and make sure they are all g
 <?php 
 if (isset($_GET['click']) && $application[0]['status'] != "IN REVIEW") {
     $message = '<div class="alert alert-info rounded-0 py-1">'.$application[0]['description'].'</div>';
-} else {
+    @$validation = $user->ageCheck($_SESSION['email']);
+} else if(isset($_GET['click']) && $application[0]['status'] == "IN REVIEW") {
     $message = '<div class="alert alert-info rounded-0 py-1">No more information</div>';
-
+    $validation = $user->ageCheck($_SESSION['email']);
 }
 echo '<tr>';
 // echo '<th scope="row">'.$rownum.'</th>';
@@ -77,5 +79,6 @@ echo '</tr>';
 <?php 
 
 echo @$message;
+echo @$validation;
 }
 ?>
